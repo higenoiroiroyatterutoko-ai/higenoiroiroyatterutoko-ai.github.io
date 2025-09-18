@@ -1,0 +1,427 @@
+/* =================================
+   基本設定
+==================================== */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #f8f9fa;
+    --text-color: #333;
+    --light-text-color: #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding-top: 60px;
+    color: var(--text-color);
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =================================
+   ヘッダー
+==================================== */
+.header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav li {
+    margin-left: 20px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: var(--primary-color);
+}
+
+.nav .contact-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.nav .contact-btn:hover {
+    background-color: #0056b3;
+    color: var(--light-text-color);
+}
+
+/* =================================
+   メインビジュアル
+==================================== */
+.hero {
+    position: relative; /* 子要素を重ねるための基準 */
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--light-text-color);
+    overflow: hidden; /* はみ出した要素を隠す */
+}
+/* スライドショーのコンテナ */
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* テキストより後ろに配置 */
+}
+
+/* 各スライドのスタイル */
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: #333; /* 画像読み込み中の背景色 */
+    opacity: 0; /* 最初は透明 */
+    transition: opacity 1.5s ease-in-out; /* 1.5秒かけてフワッと切り替える */
+}
+
+/* 表示中のスライド */
+.hero-slide.is-active {
+    opacity: 1; /* 透明を解除して表示 */
+}
+
+/* テキストコンテンツのスタイル */
+.hero-content {
+    position: relative; /* スライドより手前に配置 */
+    z-index: 2;
+    /* 背景が暗い画像でも文字が読めるように少し影を付ける */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1em;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* =================================
+   セクション共通
+==================================== */
+.section {
+    padding: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 1em;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+/* =================================
+   コンテンツ詳細
+==================================== */
+.news-list { margin: 0; padding: 0; }
+.news-list dt { font-weight: bold; margin-bottom: 0.2em; }
+.news-list dd { margin-left: 0; padding-left: 1em; border-left: 3px solid #eee; margin-bottom: 1.5em; }
+
+.activity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center; }
+.activity-item {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+    /* ↓ アニメーションを滑らかにする設定を追加 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ↓ マウスが乗った時のスタイルを追加 */
+.activity-item:hover {
+    transform: translateY(-5px); /* Y軸に-5px移動（少し上に浮く） */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* 影を付けて立体感を出す */
+}
+.recruit-section { background-color: var(--primary-color); color: var(--light-text-color); text-align: center; border-radius: 8px; }
+.recruit-section .section-title::after { background-color: var(--light-text-color); }
+/* ↓ このホバー効果のコードを追加 */
+.recruit-section .btn:hover {
+    background-color: #0056b3; /* メインカラーより少し濃い青 */
+    color: #fff; /* 文字色を白に */
+    transform: translateY(-2px); /* 少し上に浮く */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 影を付ける */
+}
+
+/* =================================
+   ギャラリー
+==================================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* サムネイルを3列に */
+    gap: 15px;
+}
+
+/* カテゴリのサムネイル全体（aタグ） */
+.gallery-category-item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 1 / 1; /* サムネイルを正方形に保つ */
+    cursor: pointer;
+}
+
+/* サムネイル画像（imgタグ） */
+.gallery-category-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 画像の比率を保ったまま、コンテナ全体を覆う */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* マウスを乗せると画像を拡大 */
+.gallery-category-item:hover img {
+    transform: scale(1.1);
+}
+
+/* タイトルのスタイル */
+.gallery-category-item .gallery-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+/* マウスを乗せるとタイトルを表示 */
+.gallery-category-item:hover .gallery-title {
+    opacity: 1;
+}
+
+/* =================================
+   メンバー紹介
+==================================== */
+.member-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding-top: 20px; }
+.member-item { text-align: center; cursor: pointer; }
+.member-item img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 3px solid white; }
+.member-item:hover img { transform: scale(1.1); opacity: 0.8; box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+.member-item p { margin-top: 10px; font-weight: bold; color: #555; }
+
+/* =================================
+   スケジュール (カレンダー)
+==================================== */
+.calendar-wrapper {
+    position: relative;
+    /* ↓ アスペクト比 4:3 を維持するための設定 */
+    padding-bottom: 75%; 
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.calendar-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* =================================
+   ポップアップ & スライドショー
+==================================== */
+.popup-overlay, .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.popup-overlay { background-color: rgba(0, 0, 0, 0.7); z-index: 1000; }
+.lightbox { background-color: rgba(0, 0, 0, 0.85); z-index: 2000; padding: 20px; box-sizing: border-box; }
+.popup-overlay.is-active, .lightbox.is-visible { opacity: 1; visibility: visible; }
+.popup-content { background-color: white; padding: 30px 40px; border-radius: 10px; text-align: center; position: relative; width: 90%; max-width: 500px; transform: scale(0.9); transition: transform 0.3s ease; }
+.popup-overlay.is-active .popup-content { transform: scale(1); }
+#popup-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; }
+#popup-name { margin-bottom: 10px; font-size: 1.5em; }
+#popup-info { color: #666; line-height: 1.6; }
+#close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; color: #aaa; cursor: pointer; transition: color 0.2s; }
+#close-btn:hover { color: #333; }
+
+.lightbox-content { position: relative; text-align: center; }
+#lightbox-img { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: 5px; }
+#lightbox-caption { color: white; margin-top: 15px; font-size: 1.1em; }
+.lightbox-close, .lightbox-prev, .lightbox-next { position: absolute; background: none; border: none; color: white; font-size: 2.5rem; cursor: pointer; transition: opacity 0.2s; padding: 10px; }
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { opacity: 0.7; }
+.lightbox-close { top: 10px; right: 20px; }
+.lightbox-prev { top: 50%; left: 20px; transform: translateY(-50%); }
+.lightbox-next { top: 50%; right: 20px; transform: translateY(-50%); }
+
+/* =================================
+   フッター
+==================================== */
+.footer { background-color: #333; color: var(--light-text-color); text-align: center; padding: 40px 0; }
+.social-links a { color: var(--light-text-color); text-decoration: none; margin: 0 10px; font-size: 1.2em; }
+.mail { margin-top: 20px; opacity: 0.8; }
+.copyright { font-size: 0.8em; opacity: 0.6; margin-top: 20px; }
+
+/* =================================
+   ハンバーガーメニュー
+==================================== */
+.hamburger-menu {
+    display: none; /* PCでは非表示が基本 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 101; /* メニューより手前に表示 */
+}
+
+.hamburger-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px 0;
+    transition: all 0.4s ease;
+}
+
+/* メニューを開いている時のハンバーガーのスタイル（×印に変形） */
+.hamburger-menu.is-open .hamburger-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger-menu.is-open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.is-open .hamburger-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* =================================
+   レスポンシブ対応
+==================================== */
+@media (max-width: 768px) {
+    body { padding-top: 50px; }
+    .header-container { height: 50px; }
+    
+    /* ハンバーガーメニューをモバイルで表示（ここで上書き） */
+    .hamburger-menu {
+        display: block;
+    }
+
+    /* モバイルでのナビゲーションメニューのスタイル */
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.98);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* 最初は非表示 */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s, visibility 0.4s;
+    }
+    
+    /* メニューを開いた時のスタイル */
+    .nav.is-open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav ul {
+        flex-direction: column; /* リンクを縦に並べる */
+    }
+
+    .nav li {
+        margin: 0;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .nav a {
+        font-size: 1.2rem;
+    }
+
+    .nav .contact-btn {
+        font-size: 1.2rem;
+    }
+    
+    /* その他のモバイル用スタイル */
+    .hero h1 { font-size: 1.8em; }
+    .activity-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
